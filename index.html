@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4efe6">
+<title>Erasmus Food</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{--bg:#f4efe6;--card:#fffdf8;--ink:#292820;--muted:#777365;--green:#536b4d;--line:#e6dfd2;--accent:#dce8d4}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:28px 20px 18px;max-width:760px;margin:auto}h1{font-size:30px;margin:0 0 4px;letter-spacing:-.8px}header p{margin:0;color:var(--muted)}
+nav{display:flex;gap:8px;overflow:auto;padding:0 16px 14px;max-width:760px;margin:auto;position:sticky;top:0;background:var(--bg);z-index:2}
+nav button,.action{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:10px 14px;font-weight:650;white-space:nowrap}
+nav button.active,.primary{background:var(--green);color:white;border-color:var(--green)}
+main{max-width:760px;margin:auto;padding:0 16px 48px}.panel{display:none}.panel.active{display:block}
+h2{font-size:21px;margin:12px 4px}.sub{color:var(--muted);font-size:13px;margin:0 4px 14px}
+.group{margin:14px 0}.group h3{font-size:15px;color:var(--green);margin:0 4px 8px}
+.item{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 13px;margin:7px 0;min-height:52px}
+.item input{width:21px;height:21px;accent-color:var(--green);flex:0 0 auto}.item label{flex:1}.item.done label{text-decoration:line-through;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin:10px 0}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.small{font-size:12px;color:var(--muted)}
+.progress{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:10px 0}.bar{height:100%;background:var(--green);width:0}
+input[type=text]{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:white;font:inherit}
+.addrow{display:flex;gap:8px;margin:12px 0}.addrow input{flex:1;min-width:0}.addrow button{border:0;border-radius:12px;background:var(--green);color:white;padding:0 16px;font-weight:700}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.actions button{font-size:13px}
+footer{max-width:760px;margin:auto;padding:0 20px 28px;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<header><h1>🍽️ Erasmus Food</h1><p>Tu recetario, tus pequeños hábitos y la compra de Carrefour · Bucarest</p></header>
+<nav>
+<button class="active" data-tab="recipes">🍳 Recetario</button>
+<button data-tab="week">✓ Esta semana</button>
+<button data-tab="snacks">🍌 Fruta y snacks</button>
+<button data-tab="shop">🛒 Compra</button>
+</nav>
+<main>
+<section id="recipes" class="panel active">
+<h2>Mis comidas</h2><p class="sub">Tu repertorio de recetas. Marca en «Esta semana» lo que hayas preparado.</p>
+<div id="recipeList"></div>
+</section>
+<section id="week" class="panel">
+<h2>Esta semana</h2><p class="sub">Marca cada plato cuando lo hayas comido. Puedes repetir platos o dejar días libres.</p>
+<div class="card"><div class="row"><strong>Progreso semanal</strong><strong id="progressText">0 platos</strong></div><div class="progress"><div class="bar" id="progressBar"></div></div><div class="actions"><button class="action" id="resetWeek">Reiniciar semana</button><button class="action" id="exportData">Exportar copia</button></div></div>
+<div id="weekList"></div>
+</section>
+<section id="snacks" class="panel">
+<h2>Fruta, frutos secos y combinaciones</h2><p class="sub">Ideas para picar cuando tengas hambre, sin obligación de hacer desayuno o merienda.</p>
+<div class="group"><h3>Fruta para tener en casa</h3><div id="fruitList"></div></div>
+<div class="group"><h3>Frutos secos</h3><div id="nutsList"></div></div>
+<div class="group"><h3>Combinaciones rápidas</h3><div id="comboList"></div></div>
+<div class="card"><strong>Objetivo orientativo de fibra</strong><p>Intenta acercarte a unos 25–30 g al día con fruta, pan integral, verduras, avena, frutos secos y legumbres. Aumenta la fibra poco a poco y bebe suficiente agua.</p></div>
+</section>
+<section id="shop" class="panel">
+<h2>Lista de la compra</h2><p class="sub">Marca lo que ya has metido en el carrito. Puedes añadir productos y reutilizar la lista la semana siguiente.</p>
+<div class="row"><strong id="shopProgress">0 comprados</strong><button class="action" id="clearBought">Desmarcar todo</button></div>
+<div id="shopList"></div>
+<div class="addrow"><input id="newItem" type="text" placeholder="Añadir producto…"><button id="addItem">Añadir</button></div>
+<div class="actions"><button class="action" id="restoreShop">Restaurar compra base</button><button class="action" id="exportShop">Copiar lista de compra</button></div>
+</section>
+</main>
+<footer>Los cambios se guardan en este navegador en este dispositivo. Usa «Exportar copia» para guardar una copia de seguridad.</footer>
+<script>
+const recipes=[
+["Arroces",["Arroz con curry suave","Arroz tres delicias"]],
+["Pasta",["Macarrones con atún y tomate","Pasta al pesto","Carbonara italiana"]],
+["Pollo y carne",["Fajitas de pollo","Hamburguesa casera","Bocadillo de lomo y queso"]],
+["Huevos y otros platos",["Tortilla francesa con patatas","Huevos rotos con jamón","Quesadillas de jamón y queso","Patatas rellenas de atún","Tostadas integrales con huevo y aguacate","Tostadas integrales de atún"]],
+["Cenas de emergencia",["Queso, frutos secos y panecillos tostados","Pizza o comida preparada"]]
+];
+const fruits=["Plátanos","Manzanas","Peras","Naranjas","Fruta de temporada"];
+const nuts=["Almendras","Nueces","Pistachos","Mezcla natural de frutos secos"];
+const combos=["Plátano + nueces","Manzana + crema de cacahuete","Yogur + avena + chía","Pera + almendras","Pan integral + queso + nueces","Palomitas caseras"];
+const baseShop=["Pan integral","Panecillos tostados","Huevos","Pechugas de pollo (paquete de 2)","Carne para hamburguesas","Lomo de cerdo","Jamón","Queso en lonchas","Queso para rallar","Atún en lata","Arroz","Pasta","Pesto","Tomate frito","Tortillas de trigo","Patatas","Aguacate","Fruta variada","Almendras y nueces","Guisantes","Zanahorias","Aceite de oliva","Pimienta negra"];
+const get=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
+let week=get("week",[]), bought=get("bought",[]), custom=get("customShop",[]);
+function save(){localStorage.setItem("week",JSON.stringify(week));localStorage.setItem("bought",JSON.stringify(bought));localStorage.setItem("customShop",JSON.stringify(custom))}
+function item(text,checked,fn){let div=document.createElement("div");div.className="item"+(checked?" done":"");let cb=document.createElement("input");cb.type="checkbox";cb.checked=checked;cb.addEventListener("change",()=>fn(cb.checked));let label=document.createElement("label");label.textContent=text;div.append(cb,label);return div}
+function renderRecipes(){let root=document.getElementById("recipeList");root.innerHTML="";recipes.forEach(([name,items])=>{let g=document.createElement("div");g.className="group";let h=document.createElement("h3");h.textContent=name;g.append(h);items.forEach(x=>{let d=document.createElement("div");d.className="item";d.innerHTML='<span>🍴</span><label></label>';d.querySelector("label").textContent=x;g.append(d)});root.append(g)})}
+function renderWeek(){let root=document.getElementById("weekList");root.innerHTML="";let total=0;recipes.forEach(([name,items])=>{let g=document.createElement("div");g.className="group";let h=document.createElement("h3");h.textContent=name;g.append(h);items.forEach(x=>{total++;g.append(item(x,week.includes(x),v=>{week=v?[...week,x]:week.filter(y=>y!==x);save();renderWeek()}))});root.append(g)});document.getElementById("progressText").textContent=week.length+" / "+total+" platos";document.getElementById("progressBar").style.width=(week.length/total*100)+"%"}
+function renderSimple(id,arr){let root=document.getElementById(id);root.innerHTML="";arr.forEach(x=>root.append(item(x,false,()=>{})))}
+function renderShop(){let root=document.getElementById("shopList");root.innerHTML="";let arr=[...baseShop,...custom];arr.forEach(x=>root.append(item(x,bought.includes(x),v=>{bought=v?[...bought,x]:bought.filter(y=>y!==x);save();renderShop()})));document.getElementById("shopProgress").textContent=bought.length+" / "+arr.length+" comprados"}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("nav button,.panel").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.tab).classList.add("active")}));
+document.getElementById("resetWeek").onclick=()=>{if(confirm("¿Reiniciar las marcas de esta semana?")){week=[];save();renderWeek()}};
+document.getElementById("clearBought").onclick=()=>{bought=[];save();renderShop()};
+document.getElementById("addItem").onclick=()=>{let v=document.getElementById("newItem").value.trim();if(v&&!baseShop.includes(v)&&!custom.includes(v)){custom.push(v);document.getElementById("newItem").value="";save();renderShop()}};
+document.getElementById("restoreShop").onclick=()=>{custom=[];bought=[];save();renderShop()};
+document.getElementById("exportShop").onclick=()=>{let txt=[...baseShop,...custom].filter(x=>!bought.includes(x)).map(x=>"☐ "+x).join("\n");navigator.clipboard?.writeText(txt).then(()=>alert("Lista pendiente copiada."),()=>alert(txt))};
+document.getElementById("exportData").onclick=()=>{let blob=new Blob([JSON.stringify({week,bought,custom},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="erasmus-food-copia.json";a.click();URL.revokeObjectURL(a.href)};
+renderRecipes();renderWeek();renderSimple("fruitList",fruits);renderSimple("nutsList",nuts);renderSimple("comboList",combos);renderShop();
+if ("serviceWorker" in navigator && location.protocol.startsWith("http")) navigator.serviceWorker.register("./sw.js");
+</script>
+</body></html>

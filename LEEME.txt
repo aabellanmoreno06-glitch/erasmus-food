@@ -1,0 +1,16 @@
+ERASMUS FOOD — archivos de la aplicación
+
+Incluye:
+- index.html: aplicación web con Recetario, Esta semana, Fruta y snacks y Compra.
+- manifest.webmanifest y sw.js: base para instalarla como PWA en Android.
+
+USO RÁPIDO:
+1. Abre index.html en un navegador para probarla.
+2. Los ticks se guardan en el almacenamiento local de ese navegador/dispositivo.
+3. Para instalarla como aplicación en Android, los archivos deben estar publicados en una dirección HTTPS.
+   Una vez publicada: abre la dirección con Chrome > menú ⋮ > Añadir a pantalla de inicio / Instalar aplicación.
+
+IMPORTANTE:
+- No está publicada en Internet ni sincroniza entre dispositivos.
+- Usa "Exportar copia" dentro de Esta semana para guardar tus marcas.
+- La lista de compra permite añadir productos y exportar los pendientes.

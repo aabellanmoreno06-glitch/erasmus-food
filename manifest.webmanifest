@@ -1,0 +1,9 @@
+{
+  "name": "Erasmus Food",
+  "short_name": "Erasmus Food",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4efe6",
+  "theme_color": "#f4efe6",
+  "description": "Recetario, seguimiento semanal y lista de la compra"
+}
