@@ -2,93 +2,145 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f4efe6">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f6f2e9">
 <title>Erasmus Food</title>
-<link rel="manifest" href="manifest.webmanifest">
 <style>
-:root{--bg:#f4efe6;--card:#fffdf8;--ink:#292820;--muted:#777365;--green:#536b4d;--line:#e6dfd2;--accent:#dce8d4}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}
-header{padding:28px 20px 18px;max-width:760px;margin:auto}h1{font-size:30px;margin:0 0 4px;letter-spacing:-.8px}header p{margin:0;color:var(--muted)}
-nav{display:flex;gap:8px;overflow:auto;padding:0 16px 14px;max-width:760px;margin:auto;position:sticky;top:0;background:var(--bg);z-index:2}
-nav button,.action{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:10px 14px;font-weight:650;white-space:nowrap}
-nav button.active,.primary{background:var(--green);color:white;border-color:var(--green)}
-main{max-width:760px;margin:auto;padding:0 16px 48px}.panel{display:none}.panel.active{display:block}
-h2{font-size:21px;margin:12px 4px}.sub{color:var(--muted);font-size:13px;margin:0 4px 14px}
-.group{margin:14px 0}.group h3{font-size:15px;color:var(--green);margin:0 4px 8px}
-.item{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 13px;margin:7px 0;min-height:52px}
-.item input{width:21px;height:21px;accent-color:var(--green);flex:0 0 auto}.item label{flex:1}.item.done label{text-decoration:line-through;color:var(--muted)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin:10px 0}
-.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.small{font-size:12px;color:var(--muted)}
-.progress{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:10px 0}.bar{height:100%;background:var(--green);width:0}
-input[type=text]{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;background:white;font:inherit}
-.addrow{display:flex;gap:8px;margin:12px 0}.addrow input{flex:1;min-width:0}.addrow button{border:0;border-radius:12px;background:var(--green);color:white;padding:0 16px;font-weight:700}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.actions button{font-size:13px}
-footer{max-width:760px;margin:auto;padding:0 20px 28px;color:var(--muted);font-size:12px}
+:root{--bg:#f6f2e9;--card:#fffdf8;--ink:#292d28;--muted:#74796f;--green:#486b50;--green2:#e5eee3;--line:#e8e3d8;--orange:#d8894c;--shadow:0 8px 24px rgba(48,54,43,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{padding:27px 20px 19px;background:linear-gradient(135deg,#e7eee2,#f7f1e6);border-bottom:1px solid var(--line)}
+.wrap{max-width:900px;margin:auto}h1{margin:0;font-size:29px;letter-spacing:-.8px}header p{margin:6px 0 0;color:#667365;font-size:14px}
+nav{display:flex;gap:8px;padding:13px 14px;overflow-x:auto;position:sticky;top:0;background:rgba(246,242,233,.96);backdrop-filter:blur(12px);z-index:5;border-bottom:1px solid var(--line)}
+nav button{border:0;background:#ebe8df;color:#5b6258;border-radius:999px;padding:10px 14px;font-size:13px;font-weight:650;white-space:nowrap}
+nav button.active{background:var(--green);color:white}
+main{max-width:900px;margin:auto;padding:20px 16px 90px}.tab{display:none}.tab.active{display:block}
+h2{font-size:22px;margin:6px 0 5px;letter-spacing:-.4px}h3{font-size:16px;margin:0 0 8px}
+.sub{color:var(--muted);font-size:13px;margin:0 0 17px;line-height:1.5}
+.section-title{display:flex;align-items:center;justify-content:space-between;margin:22px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;box-shadow:var(--shadow)}
+.card p{font-size:13px;color:var(--muted);line-height:1.5;margin:7px 0}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:9px 0}.tag{font-size:11px;padding:5px 8px;border-radius:99px;background:var(--green2);color:#45634a}
+details{margin-top:9px;border-top:1px solid var(--line);padding-top:9px}summary{font-size:13px;color:var(--green);font-weight:700;cursor:pointer}
+ul{padding-left:19px;margin:8px 0;font-size:13px;line-height:1.65}
+.weekday{margin:17px 0 8px;font-weight:800;font-size:15px}.meal{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+.meal input,.check input{accent-color:var(--green);width:18px;height:18px;margin-top:2px;flex:none}.meal label{font-size:13px;line-height:1.4;flex:1}.meal small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.checklist{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:9px}.check{display:flex;align-items:flex-start;gap:9px;background:var(--card);border:1px solid var(--line);padding:11px;border-radius:13px;font-size:13px}.check.done span{text-decoration:line-through;color:#899087}
+.pillrow{display:flex;gap:8px;flex-wrap:wrap}.pill{background:#fffdf8;border:1px solid var(--line);padding:8px 11px;border-radius:99px;font-size:12px}
+button.action{border:0;border-radius:11px;background:var(--green);color:white;padding:10px 13px;font-weight:700;font-size:12px;cursor:pointer}
+button.secondary{background:#ebe8df;color:#4e594e}
+input[type=text]{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px;background:white;font:inherit;font-size:13px}
+.addrow{display:flex;gap:8px;margin:12px 0}.addrow input{flex:1;min-width:0}
+.note{background:#edf2e9;border-radius:14px;padding:13px;color:#475b47;font-size:13px;line-height:1.5;margin:13px 0}
+.progress{height:8px;background:#e5e1d8;border-radius:99px;overflow:hidden;margin:10px 0}.progress span{display:block;height:100%;background:var(--green);width:0}
+footer{text-align:center;color:var(--muted);font-size:11px;margin-top:35px}
+@media(min-width:700px){header{padding:35px 24px 24px}main{padding:25px 22px 90px}}
 </style>
 </head>
 <body>
-<header><h1>🍽️ Erasmus Food</h1><p>Tu recetario, tus pequeños hábitos y la compra de Carrefour · Bucarest</p></header>
-<nav>
+<header><div class="wrap"><h1>🌿 Erasmus Food</h1><p>Recetario, hábitos y la compra a la semana · Bucarest</p></div></header>
+<nav id="nav">
 <button class="active" data-tab="recipes">🍳 Recetario</button>
-<button data-tab="week">✓ Esta semana</button>
-<button data-tab="snacks">🍌 Fruta y snacks</button>
-<button data-tab="shop">🛒 Compra</button>
+<button data-tab="week">📅 Esta semana</button>
+<button data-tab="snacks">🍓 Fruta y snacks</button>
+<button data-tab="nutrition">🥗 Nutrición y objetivos</button>
+<button data-tab="shopping">🛒 Compra</button>
 </nav>
 <main>
-<section id="recipes" class="panel active">
-<h2>Mis comidas</h2><p class="sub">Tu repertorio de recetas. Marca en «Esta semana» lo que hayas preparado.</p>
-<div id="recipeList"></div>
+<section id="recipes" class="tab active">
+<h2>Tu recetario</h2><p class="sub">Recetas sencillas y flexibles. Puedes consultar ingredientes e ideas de preparación.</p>
+<div class="section-title"><h3>Arroces</h3></div><div class="grid" id="rice"></div>
+<div class="section-title"><h3>Pollo</h3></div><div class="grid" id="chicken"></div>
+<div class="section-title"><h3>Pasta</h3></div><div class="grid" id="pasta"></div>
+<div class="section-title"><h3>Huevos y platos rápidos</h3></div><div class="grid" id="quick"></div>
+<div class="section-title"><h3>Bocadillos y otros</h3></div><div class="grid" id="other"></div>
 </section>
-<section id="week" class="panel">
-<h2>Esta semana</h2><p class="sub">Marca cada plato cuando lo hayas comido. Puedes repetir platos o dejar días libres.</p>
-<div class="card"><div class="row"><strong>Progreso semanal</strong><strong id="progressText">0 platos</strong></div><div class="progress"><div class="bar" id="progressBar"></div></div><div class="actions"><button class="action" id="resetWeek">Reiniciar semana</button><button class="action" id="exportData">Exportar copia</button></div></div>
-<div id="weekList"></div>
+
+<section id="week" class="tab">
+<h2>Esta semana</h2><p class="sub">Marca cada plato cuando lo hayas preparado. Puedes salir a comer si te apetece; no es obligatorio seguirlo al pie de la letra.</p>
+<div id="weeklist"></div>
+<div class="progress"><span id="weekprogress"></span></div><p class="sub" id="weekcount"></p>
+<div class="pillrow"><button class="action secondary" id="resetWeek">Reiniciar marcas de la semana</button><button class="action secondary" id="exportBackup">Exportar copia de seguridad</button></div>
 </section>
-<section id="snacks" class="panel">
-<h2>Fruta, frutos secos y combinaciones</h2><p class="sub">Ideas para picar cuando tengas hambre, sin obligación de hacer desayuno o merienda.</p>
-<div class="group"><h3>Fruta para tener en casa</h3><div id="fruitList"></div></div>
-<div class="group"><h3>Frutos secos</h3><div id="nutsList"></div></div>
-<div class="group"><h3>Combinaciones rápidas</h3><div id="comboList"></div></div>
-<div class="card"><strong>Objetivo orientativo de fibra</strong><p>Intenta acercarte a unos 25–30 g al día con fruta, pan integral, verduras, avena, frutos secos y legumbres. Aumenta la fibra poco a poco y bebe suficiente agua.</p></div>
+
+<section id="snacks" class="tab">
+<h2>Fruta y snacks</h2><p class="sub">Ideas para tener a mano en casa. Marca lo que tienes o lo que ya has comprado.</p>
+<div class="section-title"><h3>Fruta</h3></div><div class="checklist" id="fruit"></div>
+<div class="section-title"><h3>Frutos secos y básicos</h3></div><div class="checklist" id="nuts"></div>
+<div class="section-title"><h3>Combinaciones fáciles</h3></div><div class="grid" id="snackIdeas"></div>
+<div class="note">Para aumentar la fibra, hazlo poco a poco y acompáñalo de agua. La fruta entera, las legumbres, la avena, las semillas y los cereales integrales son buenos aliados.</div>
 </section>
-<section id="shop" class="panel">
-<h2>Lista de la compra</h2><p class="sub">Marca lo que ya has metido en el carrito. Puedes añadir productos y reutilizar la lista la semana siguiente.</p>
-<div class="row"><strong id="shopProgress">0 comprados</strong><button class="action" id="clearBought">Desmarcar todo</button></div>
-<div id="shopList"></div>
-<div class="addrow"><input id="newItem" type="text" placeholder="Añadir producto…"><button id="addItem">Añadir</button></div>
-<div class="actions"><button class="action" id="restoreShop">Restaurar compra base</button><button class="action" id="exportShop">Copiar lista de compra</button></div>
+
+<section id="nutrition" class="tab">
+<h2>Nutrición y objetivos</h2><p class="sub">Ideas adicionales que puedes alternar con tu menú. No son obligaciones ni sustituyen un plan individualizado.</p>
+<div class="note"><b>Objetivo de fibra orientativo: 25–30 g al día.</b><br>La cantidad necesaria varía entre personas. Aumenta la fibra gradualmente y bebe suficiente agua.</div>
+<div class="section-title"><h3>Más formas de sumar fibra</h3></div>
+<div class="grid" id="fiberIdeas"></div>
+<div class="section-title"><h3>Otros nutrientes importantes</h3></div>
+<div class="grid" id="nutrientIdeas"></div>
+<div class="note"><b>Una forma sencilla de equilibrar las comidas:</b> combina una fuente de proteína, verduras o fruta, un alimento rico en fibra (legumbres o cereal integral) y alguna grasa saludable. No hace falta que cada plato sea perfecto: importa el conjunto de la semana.</div>
 </section>
+
+<section id="shopping" class="tab">
+<h2>Lista de la compra</h2><p class="sub">Marca lo que ya has comprado. Puedes añadir productos y organizarte a tu manera.</p>
+<div id="shoppingList" class="checklist"></div>
+<div class="addrow"><input id="newItem" type="text" placeholder="Añadir producto…"><button class="action" id="addItem">Añadir</button></div>
+<div class="pillrow"><button class="action secondary" id="exportPending">Copiar compra pendiente</button><button class="action secondary" id="clearShopping">Desmarcar todo</button></div>
+</section>
+<footer>Erasmus Food · Tu cocina, a tu ritmo 🌱</footer>
 </main>
-<footer>Los cambios se guardan en este navegador en este dispositivo. Usa «Exportar copia» para guardar una copia de seguridad.</footer>
 <script>
-const recipes=[
-["Arroces",["Arroz con curry suave","Arroz tres delicias"]],
-["Pasta",["Macarrones con atún y tomate","Pasta al pesto","Carbonara italiana"]],
-["Pollo y carne",["Fajitas de pollo","Hamburguesa casera","Bocadillo de lomo y queso"]],
-["Huevos y otros platos",["Tortilla francesa con patatas","Huevos rotos con jamón","Quesadillas de jamón y queso","Patatas rellenas de atún","Tostadas integrales con huevo y aguacate","Tostadas integrales de atún"]],
-["Cenas de emergencia",["Queso, frutos secos y panecillos tostados","Pizza o comida preparada"]]
+const recipes = [
+{id:'curry',name:'Arroz con curry suave y pollo',cat:['rice','chicken'],desc:'Arroz especiado suave con pollo y verduras.',tags:['Arroz','Pollo','Comida completa'],ingredients:['Arroz','Pechuga de pollo','Cebolla','Zanahoria o guisantes','Curry suave','Leche o yogur natural (opcional)'],steps:'Dora la cebolla y el pollo en trozos. Añade las verduras, el curry y un poco de agua o leche. Cocina el arroz aparte o incorpóralo según prefieras; mezcla y ajusta de sal.'},
+{id:'three-rice',name:'Arroz tres delicias',cat:['rice'],desc:'Arroz salteado con huevo, guisantes y zanahoria.',tags:['Arroz','Huevo','Verduras'],ingredients:['Arroz','Huevo','Guisantes','Zanahoria','Jamón cocido (opcional)','Salsa de soja (opcional)'],steps:'Cuece el arroz. Saltea zanahoria y guisantes, añade huevo revuelto y el jamón. Incorpora el arroz y mezcla.'},
+{id:'fajitas',name:'Fajitas de pollo',cat:['chicken'],desc:'Con pimiento y cebolla para sumar verduras.',tags:['Pollo','Verduras'],ingredients:['Tortillas de trigo','Pechuga de pollo','Pimiento','Cebolla','Especias para fajitas','Yogur natural (opcional)'],steps:'Saltea el pollo en tiras con pimiento y cebolla. Añade especias y sirve dentro de las tortillas.'},
+{id:'macaroni-tuna',name:'Macarrones con atún y tomate',cat:['pasta'],desc:'Una receta rápida de despensa.',tags:['Pasta','Pescado'],ingredients:['Macarrones','Atún en lata','Tomate triturado o frito','Cebolla (opcional)'],steps:'Cuece la pasta. Calienta el tomate, añade el atún escurrido y mezcla con los macarrones.'},
+{id:'pesto',name:'Pasta al pesto',cat:['pasta'],desc:'Sencilla y lista en pocos minutos.',tags:['Pasta'],ingredients:['Pasta','Pesto','Tomates cherry o espinacas (opcional)','Queso rallado (opcional)'],steps:'Cuece la pasta y reserva un poco de agua. Mezcla con pesto y añade un chorrito del agua para ligar. Completa con verduras si te apetece.'},
+{id:'carbonara',name:'Carbonara italiana',cat:['pasta'],desc:'La versión clásica con huevo, queso y pimienta.',tags:['Pasta','Huevo'],ingredients:['Pasta','Guanciale o panceta','Yemas de huevo','Pecorino o parmesano','Pimienta negra'],steps:'Dora el guanciale. Mezcla yemas, queso y pimienta. Fuera del fuego, combina la pasta caliente con la mezcla y un poco de agua de cocción hasta formar una salsa cremosa.'},
+{id:'omelette',name:'Tortilla francesa con patatas',cat:['quick'],desc:'Cena sencilla y saciante.',tags:['Huevo','Patata'],ingredients:['Huevos','Patatas','Aceite de oliva','Sal'],steps:'Cocina las patatas en dados a la sartén o al microondas. Prepara una tortilla francesa y acompaña con las patatas.'},
+{id:'eggs-jam',name:'Huevos rotos con jamón',cat:['quick'],desc:'Patatas con huevos y jamón.',tags:['Huevo','Patata'],ingredients:['Patatas','Huevos','Jamón serrano','Aceite de oliva'],steps:'Cocina las patatas en dados o rodajas. Fríe o cocina los huevos y colócalos encima con el jamón. Rompe las yemas al servir.'},
+{id:'burger',name:'Hamburguesa casera',cat:['other'],desc:'Puedes acompañarla con ensalada y pan integral.',tags:['Carne','Flexible'],ingredients:['Carne picada o hamburguesa','Pan de hamburguesa','Lechuga y tomate','Queso (opcional)'],steps:'Forma y cocina la hamburguesa a la sartén. Sirve en el pan con tomate, lechuga y los acompañamientos que te gusten.'},
+{id:'quesadilla',name:'Quesadillas de jamón y queso',cat:['other'],desc:'Una cena rápida y adaptable.',tags:['Rápida'],ingredients:['Tortillas de trigo','Jamón cocido','Queso','Tomate o espinacas (opcional)'],steps:'Rellena la tortilla, dóblala y tuéstala por ambos lados en una sartén hasta que el queso se funda.'},
+{id:'sandwich',name:'Bocadillo de lomo y queso',cat:['other'],desc:'Con tomate o una ensalada al lado.',tags:['Bocadillo'],ingredients:['Pan','Lomo de cerdo (cotlet de porc)','Queso','Tomate (opcional)'],steps:'Cocina el lomo a la plancha y monta el bocadillo con queso y tomate.'},
+{id:'scramble',name:'Huevos revueltos con jamón',cat:['quick'],desc:'Cena rápida con pan integral o tomate.',tags:['Huevo','Rápida'],ingredients:['Huevos','Jamón','Pan integral (opcional)'],steps:'Cuaja los huevos a fuego bajo removiendo suavemente. Añade el jamón y sirve.'},
+{id:'potato-tuna',name:'Patatas rellenas de atún',cat:['other'],desc:'Puedes añadir maíz o yogur natural.',tags:['Atún','Patata'],ingredients:['Patatas','Atún en lata','Yogur natural o queso fresco','Maíz (opcional)','Tomate'],steps:'Cuece o asa las patatas. Ábrelas, mezcla el interior con atún y yogur o queso fresco y vuelve a rellenar.'},
+{id:'toast-avocado',name:'Tostadas integrales con huevo y aguacate',cat:['quick'],desc:'Una opción con fibra y grasas saludables.',tags:['Integral','Huevo'],ingredients:['Pan integral','Huevo','Aguacate','Limón (opcional)'],steps:'Tuesta el pan, añade aguacate machacado y un huevo a la plancha o cocido.'},
+{id:'toast-tuna',name:'Tostadas integrales de atún y tomate',cat:['quick'],desc:'Fáciles y con proteína.',tags:['Integral','Atún'],ingredients:['Pan integral','Atún','Tomate','Aceite de oliva'],steps:'Tuesta el pan y cúbrelo con tomate y atún escurrido. Añade aceite de oliva.'},
+{id:'cheese-snack',name:'Queso, frutos secos y panecillos',cat:['quick'],desc:'Cena comodín para días sin ganas de cocinar.',tags:['Sin cocinar'],ingredients:['Queso','Nueces o almendras','Panecillos tostados','Fruta o tomate (opcional)'],steps:'Sirve una ración de queso, frutos secos y panecillos. Añade fruta o verdura para completar.'},
+{id:'pizza',name:'Pizza o comida preparada',cat:['other'],desc:'Una solución ocasional para un día ocupado.',tags:['Comodín'],ingredients:['Pizza o plato preparado','Ensalada o verduras (opcional)'],steps:'Prepara según las instrucciones del envase. Si puedes, acompaña con una ensalada o verduras.'}
 ];
-const fruits=["Plátanos","Manzanas","Peras","Naranjas","Fruta de temporada"];
-const nuts=["Almendras","Nueces","Pistachos","Mezcla natural de frutos secos"];
-const combos=["Plátano + nueces","Manzana + crema de cacahuete","Yogur + avena + chía","Pera + almendras","Pan integral + queso + nueces","Palomitas caseras"];
-const baseShop=["Pan integral","Panecillos tostados","Huevos","Pechugas de pollo (paquete de 2)","Carne para hamburguesas","Lomo de cerdo","Jamón","Queso en lonchas","Queso para rallar","Atún en lata","Arroz","Pasta","Pesto","Tomate frito","Tortillas de trigo","Patatas","Aguacate","Fruta variada","Almendras y nueces","Guisantes","Zanahorias","Aceite de oliva","Pimienta negra"];
-const get=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
-let week=get("week",[]), bought=get("bought",[]), custom=get("customShop",[]);
-function save(){localStorage.setItem("week",JSON.stringify(week));localStorage.setItem("bought",JSON.stringify(bought));localStorage.setItem("customShop",JSON.stringify(custom))}
-function item(text,checked,fn){let div=document.createElement("div");div.className="item"+(checked?" done":"");let cb=document.createElement("input");cb.type="checkbox";cb.checked=checked;cb.addEventListener("change",()=>fn(cb.checked));let label=document.createElement("label");label.textContent=text;div.append(cb,label);return div}
-function renderRecipes(){let root=document.getElementById("recipeList");root.innerHTML="";recipes.forEach(([name,items])=>{let g=document.createElement("div");g.className="group";let h=document.createElement("h3");h.textContent=name;g.append(h);items.forEach(x=>{let d=document.createElement("div");d.className="item";d.innerHTML='<span>🍴</span><label></label>';d.querySelector("label").textContent=x;g.append(d)});root.append(g)})}
-function renderWeek(){let root=document.getElementById("weekList");root.innerHTML="";let total=0;recipes.forEach(([name,items])=>{let g=document.createElement("div");g.className="group";let h=document.createElement("h3");h.textContent=name;g.append(h);items.forEach(x=>{total++;g.append(item(x,week.includes(x),v=>{week=v?[...week,x]:week.filter(y=>y!==x);save();renderWeek()}))});root.append(g)});document.getElementById("progressText").textContent=week.length+" / "+total+" platos";document.getElementById("progressBar").style.width=(week.length/total*100)+"%"}
-function renderSimple(id,arr){let root=document.getElementById(id);root.innerHTML="";arr.forEach(x=>root.append(item(x,false,()=>{})))}
-function renderShop(){let root=document.getElementById("shopList");root.innerHTML="";let arr=[...baseShop,...custom];arr.forEach(x=>root.append(item(x,bought.includes(x),v=>{bought=v?[...bought,x]:bought.filter(y=>y!==x);save();renderShop()})));document.getElementById("shopProgress").textContent=bought.length+" / "+arr.length+" comprados"}
-document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("nav button,.panel").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.tab).classList.add("active")}));
-document.getElementById("resetWeek").onclick=()=>{if(confirm("¿Reiniciar las marcas de esta semana?")){week=[];save();renderWeek()}};
-document.getElementById("clearBought").onclick=()=>{bought=[];save();renderShop()};
-document.getElementById("addItem").onclick=()=>{let v=document.getElementById("newItem").value.trim();if(v&&!baseShop.includes(v)&&!custom.includes(v)){custom.push(v);document.getElementById("newItem").value="";save();renderShop()}};
-document.getElementById("restoreShop").onclick=()=>{custom=[];bought=[];save();renderShop()};
-document.getElementById("exportShop").onclick=()=>{let txt=[...baseShop,...custom].filter(x=>!bought.includes(x)).map(x=>"☐ "+x).join("\n");navigator.clipboard?.writeText(txt).then(()=>alert("Lista pendiente copiada."),()=>alert(txt))};
-document.getElementById("exportData").onclick=()=>{let blob=new Blob([JSON.stringify({week,bought,custom},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="erasmus-food-copia.json";a.click();URL.revokeObjectURL(a.href)};
-renderRecipes();renderWeek();renderSimple("fruitList",fruits);renderSimple("nutsList",nuts);renderSimple("comboList",combos);renderShop();
-if ("serviceWorker" in navigator && location.protocol.startsWith("http")) navigator.serviceWorker.register("./sw.js");
+const weekly=[['Lunes','Comida','curry'],['Lunes','Cena','omelette'],['Martes','Comida','macaroni-tuna'],['Martes','Cena','fajitas'],['Miércoles','Comida','eggs-jam'],['Miércoles','Cena','burger'],['Jueves','Comida','pesto'],['Jueves','Cena','three-rice'],['Viernes','Comida','carbonara'],['Viernes','Cena','quesadilla'],['Sábado','Comida','sandwich'],['Sábado','Cena','scramble'],['Domingo','Comida','potato-tuna'],['Domingo','Cena','pizza']];
+const fruit=['Plátanos','Manzanas','Peras','Naranjas','Fresas','Fruta de temporada'];
+const nuts=['Almendras','Nueces','Pistachos','Mezcla de frutos secos natural','Avena','Semillas de chía','Yogur natural'];
+const snackIdeas=[
+['Plátano + nueces','Fruta, fibra y grasas saludables.'],['Manzana + crema de cacahuete','Combina fruta con grasas y algo de proteína.'],['Yogur + avena + chía','Una mezcla fácil para sumar fibra y calcio.'],['Pera + almendras','Fruta entera y frutos secos.'],['Pan integral + queso + nueces','Una opción salada y saciante.'],['Palomitas caseras','El maíz es un cereal integral; mejor con poca sal.'],['Fresas + yogur natural','Fruta, calcio y una opción fresca.'],['Zanahoria + hummus','Verdura y legumbres en un snack.'],['Tostada integral + aguacate','Aporta fibra y grasas insaturadas.'],['Kiwi + copos de avena','Fruta y cereal integral.']
+];
+const fiberIdeas=[
+['Avena en el yogur','Añade 3–4 cucharadas de copos de avena y una fruta.'],['Lentejas','En ensalada, guiso o con arroz; son una fuente muy buena de fibra.'],['Garbanzos crujientes','Escurre, aliña con especias y hornéalos o saltéalos.'],['Hummus con verduras','Acompaña hummus con zanahoria, pepino o pimiento.'],['Semillas de chía','Añade una cucharadita a yogur o avena y deja que se hidraten.'],['Pan integral de verdad','Elige uno cuyo primer ingrediente sea harina integral.'],['Fruta con piel','Manzana y pera bien lavadas aportan más fibra si comes la piel.'],['Brócoli y coliflor','Añade una ración como guarnición o a la pasta.'],['Alubias o judías','En ensalada con tomate, pimiento y aceite de oliva.'],['Palomitas caseras','El maíz entero aporta fibra; evita exceso de mantequilla y sal.'],['Frutos rojos','Frambuesas, moras y fresas pueden complementar yogur o avena.'],['Boniato con piel','Asado y acompañado de una fuente de proteína.']
+];
+const nutrientIdeas=[
+['Proteína: yogur griego y queso fresco','Úsalos en desayunos, cenas ligeras o como complemento. También puedes recurrir a huevos, pescado, legumbres, tofu y carnes.'],['Hierro: lentejas con pimiento','Las legumbres aportan hierro vegetal. Acompáñalas con pimiento, tomate, naranja o kiwi (vitamina C).'],['Calcio: lácteos o alternativas enriquecidas','Leche, yogur, queso y bebidas vegetales enriquecidas con calcio ayudan a cubrirlo.'],['Omega-3: pescado azul','Sardinas, caballa y salmón son opciones. Las nueces y la chía aportan omega-3 vegetal.'],['Vitamina D: pescado y huevos','Se encuentra en algunos pescados grasos y huevos; también depende de la exposición solar y otros factores.'],['Potasio: patata, plátano y legumbres','Incluye patata, plátano, alubias, lentejas y verduras variadas.'],['Folato: hojas verdes y legumbres','Espinacas, brócoli, espárragos y legumbres son buenas opciones.'],['Yodo: pescado, lácteos y sal yodada','Usa sal yodada con moderación; no aumentes la sal para conseguir yodo.'],['Grasas saludables: aceite de oliva y frutos secos','Úsalos en cantidades moderadas para completar ensaladas, tostadas y platos.'],['Comida completa: bol de legumbres','Combina garbanzos o lentejas con arroz, verduras y huevo o atún.']
+];
+const shoppingDefaults=['Pechuga de pollo','Arroz','Pasta / macarrones','Atún en lata','Tomate triturado','Pesto','Huevos','Patatas','Jamón','Queso','Tortillas de trigo','Pan integral','Lomo de cerdo','Pimiento','Cebolla','Zanahorias','Guisantes','Aguacates','Yogur natural','Fruta variada','Fresas','Avena','Chía','Nueces o almendras','Lechuga o ensalada'];
+const $=id=>document.getElementById(id);
+const get=(key,def)=>{try{return JSON.parse(localStorage.getItem('ef_'+key))??def}catch{return def}};
+const set=(key,val)=>localStorage.setItem('ef_'+key,JSON.stringify(val));
+function recipeCard(r){return `<article class="card"><h3>${r.name}</h3><p>${r.desc}</p><div class="tags">${r.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div><details><summary>Ingredientes y preparación</summary><b>Ingredientes</b><ul>${r.ingredients.map(i=>`<li>${i}</li>`).join('')}</ul><b>Preparación</b><p>${r.steps}</p></details></article>`}
+function renderRecipes(){['rice','chicken','pasta','quick','other'].forEach(cat=>$(cat).innerHTML=recipes.filter(r=>r.cat.includes(cat)).map(recipeCard).join(''))}
+function renderWeek(){let checks=get('weekChecks',{});let last='';$('weeklist').innerHTML=weekly.map(([day,meal,id],i)=>{let r=recipes.find(x=>x.id===id);let head=day!==last?`<div class="weekday">${day}</div>`:'';last=day;let key=day+'-'+meal;return `${head}<div class="meal"><input type="checkbox" data-week="${key}" ${checks[key]?'checked':''}><label>${meal}: <b>${r.name}</b><small>${day==='Domingo'&&meal==='Comida'?'También puedes salir a comer si te apetece.':''}</small></label></div>`}).join('');document.querySelectorAll('[data-week]').forEach(el=>el.addEventListener('change',()=>{checks[el.dataset.week]=el.checked;set('weekChecks',checks);updateProgress()}));updateProgress()}
+function updateProgress(){let c=get('weekChecks',{}),n=Object.values(c).filter(Boolean).length,total=weekly.length;$('weekprogress').style.width=(n/total*100)+'%';$('weekcount').textContent=`${n} de ${total} comidas y cenas marcadas esta semana.`}
+function renderChecks(target,items,key){let vals=get(key,{});$(target).innerHTML=items.map((item,i)=>`<label class="check ${vals[item]?'done':''}"><input type="checkbox" data-list="${key}" data-item="${item.replaceAll('"','&quot;')}" ${vals[item]?'checked':''}><span>${item}</span></label>`).join('');$(target).querySelectorAll('input').forEach(el=>el.addEventListener('change',()=>{vals[el.dataset.item]=el.checked;set(key,vals);el.closest('.check').classList.toggle('done',el.checked)}))}
+function renderIdeas(target,items){$(target).innerHTML=items.map(([title,desc])=>`<article class="card"><h3>${title}</h3><p>${desc}</p></article>`).join('')}
+function renderShopping(){let items=get('shoppingItems',shoppingDefaults.map(name=>({name,done:false})));$('shoppingList').innerHTML=items.map((it,i)=>`<label class="check ${it.done?'done':''}"><input type="checkbox" data-shop="${i}" ${it.done?'checked':''}><span>${it.name}</span></label>`).join('');$('shoppingList').querySelectorAll('input').forEach(el=>el.addEventListener('change',()=>{items[+el.dataset.shop].done=el.checked;set('shoppingItems',items);renderShopping()}))}
+function init(){renderRecipes();renderWeek();renderChecks('fruit',fruit,'fruitChecks');renderChecks('nuts',nuts,'nutsChecks');renderIdeas('snackIdeas',snackIdeas);renderIdeas('fiberIdeas',fiberIdeas);renderIdeas('nutrientIdeas',nutrientIdeas);renderShopping()}
+document.querySelectorAll('nav button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.id===btn.dataset.tab));window.scrollTo({top:0,behavior:'smooth'})}));
+$('resetWeek').onclick=()=>{if(confirm('¿Reiniciar las marcas de esta semana?')){set('weekChecks',{});renderWeek()}};
+$('exportBackup').onclick=()=>{let data={weekChecks:get('weekChecks',{}),fruitChecks:get('fruitChecks',{}),nutsChecks:get('nutsChecks',{}),shoppingItems:get('shoppingItems',shoppingDefaults.map(name=>({name,done:false})))};download('erasmus-food-copia.json',JSON.stringify(data,null,2),'application/json')};
+$('addItem').onclick=()=>{let v=$('newItem').value.trim();if(!v)return;let items=get('shoppingItems',shoppingDefaults.map(name=>({name,done:false})));items.push({name:v,done:false});set('shoppingItems',items);$('newItem').value='';renderShopping()};
+$('newItem').addEventListener('keydown',e=>{if(e.key==='Enter')$('addItem').click()});
+$('clearShopping').onclick=()=>{let items=get('shoppingItems',shoppingDefaults.map(name=>({name,done:false}))).map(x=>({...x,done:false}));set('shoppingItems',items);renderShopping()};
+$('exportPending').onclick=()=>{let items=get('shoppingItems',shoppingDefaults.map(name=>({name,done:false}))).filter(x=>!x.done).map(x=>'• '+x.name).join('\n');download('compra-pendiente.txt',items,'text/plain')};
+function download(name,content,type){let a=document.createElement('a'),url=URL.createObjectURL(new Blob([content],{type}));a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)}
+init();
 </script>
 </body></html>
